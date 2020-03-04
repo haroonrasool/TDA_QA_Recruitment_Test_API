@@ -8,8 +8,6 @@ import static io.restassured.RestAssured.given;
 
 public class TDA_QA_Recruitment_Test_API {
 
-    String loginToken;
-
     @Test
     public void healthCheck() {
         System.out.println("******* Health Check *******");
