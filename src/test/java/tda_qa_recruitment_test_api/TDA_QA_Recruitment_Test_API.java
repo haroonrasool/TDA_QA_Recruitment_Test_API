@@ -8,6 +8,8 @@ import static io.restassured.RestAssured.given;
 
 public class TDA_QA_Recruitment_Test_API {
 
+    String loginToken;
+
     @Test
     public void healthCheck() {
         System.out.println("******* Health Check *******");
@@ -50,14 +52,17 @@ public class TDA_QA_Recruitment_Test_API {
         response.prettyPrint();
         Assert.assertEquals(200, response.getStatusCode());
         String loginToken = response.getHeader("login-token");
-        System.out.println(loginToken);
+        System.out.println("Login Token: " + loginToken);
+    }
 
+    @Test
+    public void bookingInfo() {
         System.out.println("******* Booking Info *******");
-        response = given()
+        Response response = given()
                 .header("device-os", "android", "ios")
                 .header("app-locale", "en_GB", "de_DE")
                 .header("x-api-key", "1b34X9pNjg5lMvRAXLNTS85TQgrzoYLEa3LUQ6Wh")
-                .header("login-token", loginToken)
+                .header("login-token", "1583343195397")
                 .header("id", "ADE9452")
                 .get("https://4s9rh46bpe.execute-api.eu-central-1.amazonaws.com/test/v1/bookings/ADE9452");
         response.prettyPrint();
@@ -71,7 +76,7 @@ public class TDA_QA_Recruitment_Test_API {
                 .header("device-os", "android")
                 .header("app-locale", "en_GB")
                 .header("x-api-key", "1b34X9pNjg5lMvRAXLNTS85TQgrzoYLEa3LUQ6Wh")
-                .header("login-token", "1581478397724")
+                .header("login-token", "1583343195397")
                 .get("https://4s9rh46bpe.execute-api.eu-central-1.amazonaws.com/test/v1/bookings");
         response.prettyPrint();
         Assert.assertEquals(200, response.getStatusCode());
@@ -84,7 +89,7 @@ public class TDA_QA_Recruitment_Test_API {
                 .header("device-os", "ios")
                 .header("app-locale", "de_DE")
                 .header("x-api-key", "1b34X9pNjg5lMvRAXLNTS85TQgrzoYLEa3LUQ6Wh")
-                .header("login-token", "1581478397724")
+                .header("login-token", "1583343195397")
                 .header("id", "ADE9452")
                 .get("https://4s9rh46bpe.execute-api.eu-central-1.amazonaws.com/test/v1/bookings/ADE9452/weather");
         response.prettyPrint();
