@@ -38,6 +38,7 @@ public class TDA_QA_Recruitment_Test_API {
 
     @Test
     public void loginUK() {
+        String loginToken;
         System.out.println("******* Login UK *******");
         Response response = given().when()
                 .param("bookingRef", "AR58930")
@@ -49,45 +50,45 @@ public class TDA_QA_Recruitment_Test_API {
                 .get("https://4s9rh46bpe.execute-api.eu-central-1.amazonaws.com/test/auth/login");
         response.prettyPrint();
         Assert.assertEquals(200, response.getStatusCode());
-        String loginToken = response.getHeader("login-token");
+        loginToken = response.getHeader("login-token");
         System.out.println("Login Token: " + loginToken);
-    }
-
-    @Test
-    public void bookingInfo() {
+//    }
+//
+//    @Test
+//    public void bookingInfo() {
         System.out.println("******* Booking Info *******");
-        Response response = given()
+        response = given()
                 .header("device-os", "android", "ios")
                 .header("app-locale", "en_GB", "de_DE")
                 .header("x-api-key", "1b34X9pNjg5lMvRAXLNTS85TQgrzoYLEa3LUQ6Wh")
-                .header("login-token", "1583343195397")
+                .header("login-token", loginToken)
                 .header("id", "ADE9452")
                 .get("https://4s9rh46bpe.execute-api.eu-central-1.amazonaws.com/test/v1/bookings/ADE9452");
         response.prettyPrint();
         Assert.assertEquals(200, response.getStatusCode());
-    }
-
-    @Test
-    public void availableBookings() {
+//    }
+//
+//    @Test
+//    public void availableBookings() {
         System.out.println("******* Available Booking *******");
-        Response response = given().when()
+        response = given().when()
                 .header("device-os", "android")
                 .header("app-locale", "en_GB")
                 .header("x-api-key", "1b34X9pNjg5lMvRAXLNTS85TQgrzoYLEa3LUQ6Wh")
-                .header("login-token", "1583343195397")
+                .header("login-token", loginToken)
                 .get("https://4s9rh46bpe.execute-api.eu-central-1.amazonaws.com/test/v1/bookings");
         response.prettyPrint();
         Assert.assertEquals(200, response.getStatusCode());
-    }
-
-    @Test
-    public void weather() {
+//    }
+//
+//    @Test
+//    public void weather() {
         System.out.println("******* Weather *******");
-        Response response = given()
+        response = given()
                 .header("device-os", "ios")
                 .header("app-locale", "de_DE")
                 .header("x-api-key", "1b34X9pNjg5lMvRAXLNTS85TQgrzoYLEa3LUQ6Wh")
-                .header("login-token", "1583343195397")
+                .header("login-token", loginToken)
                 .header("id", "ADE9452")
                 .get("https://4s9rh46bpe.execute-api.eu-central-1.amazonaws.com/test/v1/bookings/ADE9452/weather");
         response.prettyPrint();
